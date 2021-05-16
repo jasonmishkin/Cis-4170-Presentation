@@ -1,0 +1,419 @@
+#importing modules for the assignment
+from matplotlib import pyplot as plt
+import pandas as pd
+import seaborn as sns
+
+#This dataset contains state-wide unemployment rate data for year 2020 from January - March
+unemployment_state = pd.read_csv('unemployment_data_us_state.csv')
+unemployment_state
+
+#This dataset contains unemployment rate records based on education qualification, race, and gender of adults.
+unemployment = pd.read_csv('unemployment_data_us.csv')
+unemployment
+
+#Analyzing the First Dataset
+#Filtering out the top five states with the highest and lowest unemployment rates in January 2020
+Country =['Jan-2020']
+rdf = unemployment_state[unemployment_state.Date.isin(Country)].copy().sort_values(by = "Unemployment_Rate", ascending = False)
+
+highest_rate = rdf[rdf['Unemployment_Rate'] > 5]
+lowest_rate = rdf[rdf['Unemployment_Rate'] < 2.6]
+
+#Filtering out the top five states with the highest and lowest unemployment rates in February 2020
+Country =['Feb-2020']
+rdg = unemployment_state[unemployment_state.Date.isin(Country)].copy().sort_values(by = "Unemployment_Rate", ascending = False)
+rdg
+highest_rate1 = rdg[rdg['Unemployment_Rate'] > 5]
+lowest_rate1 = rdg[rdg['Unemployment_Rate'] < 2.7]
+
+#Filtering out the top five states with the highest and lowest unemployment rates in March 2020
+Country =['Mar-2020']
+rdj = unemployment_state[unemployment_state.Date.isin(Country)].copy().sort_values(by = "Unemployment_Rate", ascending = False)
+rdj
+highest_rate2 = rdj[rdj['Unemployment_Rate'] > 5.9]
+lowest_rate2 = rdj[rdj['Unemployment_Rate'] < 2.7]
+
+#Visualizing the Dataset for each month in 2020
+#Graphs displaying the top five States with the highest unemployment rates, and the top five States with the lowest unemployment rates for January 2020
+fig, ax = plt.subplots(figsize=(7,7))
+colors1 = ['g','b','b','b','b']
+ax = plt.subplot(2,1,2)
+
+bars = ax.bar(
+    x=highest_rate['State'],
+    height=highest_rate['Unemployment_Rate'],
+    color = colors1
+)
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_color('#DDDDDD')
+
+ax.tick_params(bottom=False, left=False)
+ax.set_axisbelow(True)
+ax.yaxis.grid(True, color='#EEEEEE')
+ax.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+  )
+
+ax.set_xlabel('States', labelpad=15, color='#333333')
+ax.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax.set_title('Top 5 States with the Highest Unemployment in January 2020', pad=15, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+fig, ax1 = plt.subplots(figsize=(7,7))
+colors2 = ['b','b','b','b','r']
+ax1 = plt.subplot(2,1,2)
+bars = ax1.bar(
+    x=lowest_rate['State'],
+    height=lowest_rate['Unemployment_Rate'],
+    color=colors2
+)
+ax1.spines['top'].set_visible(False)
+ax1.spines['right'].set_visible(False)
+ax1.spines['left'].set_visible(False)
+ax1.spines['bottom'].set_color('#DDDDDD')
+
+ax1.tick_params(bottom=False, left=False)
+ax1.set_axisbelow(True)
+ax1.yaxis.grid(True, color='#EEEEEE')
+ax1.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax1.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+  )
+
+ax1.set_xlabel('States', labelpad=15, color='#333333')
+ax1.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax1.set_title('Top 5 States with the Lowest Unemployment in January 2020', pad=35, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+#Graphs displaying the top five States with the highest unemployment rates, and the top five States with the lowest unemployment rates for February 2020
+fig, ax = plt.subplots(figsize=(7,7))
+colors1 = ['g','g','b','b','b']
+ax = plt.subplot(2,1,2)
+
+bars = ax.bar(
+    x=highest_rate1['State'],
+    height=highest_rate1['Unemployment_Rate'],
+    color = colors1
+)
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_color('#DDDDDD')
+
+ax.tick_params(bottom=False, left=False)
+ax.set_axisbelow(True)
+ax.yaxis.grid(True, color='#EEEEEE')
+ax.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+  )
+
+ax.set_xlabel('States', labelpad=15, color='#333333')
+ax.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax.set_title('Top 5 States with the Highest Unemployment in February 2020', pad=15, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+fig, ax1 = plt.subplots(figsize=(7,7))
+colors2 = ['b','b','b','b','r']
+ax1 = plt.subplot(2,1,2)
+bars = ax1.bar(
+    x=lowest_rate1['State'],
+    height=lowest_rate1['Unemployment_Rate'],
+    color=colors2
+)
+ax1.spines['top'].set_visible(False)
+ax1.spines['right'].set_visible(False)
+ax1.spines['left'].set_visible(False)
+ax1.spines['bottom'].set_color('#DDDDDD')
+
+ax1.tick_params(bottom=False, left=False)
+ax1.set_axisbelow(True)
+ax1.yaxis.grid(True, color='#EEEEEE')
+ax1.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax1.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+)
+
+ax1.set_xlabel('States', labelpad=15, color='#333333')
+ax1.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax1.set_title('Top 5 States with the Lowest Unemployment in February 2020', pad=35, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+#Graphs displaying the top five States with the highest unemployment rates, and the top five States with the lowest unemployment rates for March 2020
+fig, ax = plt.subplots(figsize=(7,7))
+colors1 = ['g','b','b','b','b']
+ax = plt.subplot(2,1,2)
+
+bars = ax.bar(
+    x=highest_rate2['State'],
+    height=highest_rate2['Unemployment_Rate'],
+    color = colors1
+)
+
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['left'].set_visible(False)
+ax.spines['bottom'].set_color('#DDDDDD')
+
+ax.tick_params(bottom=False, left=False)
+ax.set_axisbelow(True)
+ax.yaxis.grid(True, color='#EEEEEE')
+ax.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+  )
+
+ax.set_xlabel('States', labelpad=15, color='#333333')
+ax.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax.set_title('Top 5 States with the Highest Unemployment in March 2020', pad=15, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+fig, ax1 = plt.subplots(figsize=(7,7))
+colors2 = ['b','b','b','b','r']
+ax1 = plt.subplot(2,1,2)
+bars = ax1.bar(
+    x=lowest_rate2['State'],
+    height=lowest_rate2['Unemployment_Rate'],
+    color=colors2
+)
+ax1.spines['top'].set_visible(False)
+ax1.spines['right'].set_visible(False)
+ax1.spines['left'].set_visible(False)
+ax1.spines['bottom'].set_color('#DDDDDD')
+
+ax1.tick_params(bottom=False, left=False)
+ax1.set_axisbelow(True)
+ax1.yaxis.grid(True, color='#EEEEEE')
+ax1.xaxis.grid(False)
+
+bar_color = bars[0].get_facecolor()
+for bar in bars:
+  ax1.text(
+      bar.get_x() + bar.get_width() / 2,
+      bar.get_height() + 0.3,
+      round(bar.get_height(), 1),
+      horizontalalignment='center',
+      color=bar_color,
+      weight='bold'
+  )
+
+ax1.set_xlabel('States', labelpad=15, color='#333333')
+ax1.set_ylabel('Unemployment Rates', labelpad=15, color='#333333')
+ax1.set_title('Top 5 States with the Lowest Unemployment in March 2020', pad=35, color='#333333',
+             weight='bold')
+
+fig.tight_layout()
+
+#Analyzing the second dataset - looking at unemplyment rates for different groups
+#Filtering out the year 2020, and then analyzing the rates over January, February, and March
+year1 =['2020']
+rdp = unemployment[unemployment.Year.isin(year1)].copy()
+
+Month = ['Jan',"Feb",'Mar']
+month1 = rdp[rdp.Month.isin(Month)].copy()
+#month1
+month1.set_index('Month',inplace=True)
+#month1
+
+#Analyzing the four ethnicities unemployment rate in March of 2020
+March = ['Mar']
+march1 = month1[month1.Month.isin(March)].copy()
+march1
+four = march1[['White','Black','Asian','Hispanic']]
+four
+ethinicity = four.T # or df1.transpose()
+ethinicity.rename(columns={32: "Unemployment Rate"},inplace=True)
+#ethinicity
+
+#Plotting the graphs
+#month1.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'],align='edge')
+#month1.plot(y=['Men','Women'],marker='+')
+#ethinicity.plot.pie(subplots=True,autopct='%1.1f%%')
+
+#Filtering out the year 2019, and then analyzing the rates over January, February, and March
+year2 =['2019']
+rda = unemployment[unemployment.Year.isin(year2)].copy()
+rda.set_index('Month',inplace=True)
+#Month = ['Jan',"Feb",'Mar']
+#month2 = rda[rda.Month.isin(Month)].copy()
+#month2
+
+#month2.set_index('Month',inplace=True)
+#month2
+
+#Analyzing the four ethnicities unemployment rate in March of 2019
+March = ['Mar']
+march2 = rda[rda.Month.isin(March)].copy()
+march2
+four1 = march2[['White','Black','Asian','Hispanic']]
+four1
+ethinicity1 = four1.T # or df1.transpose()
+ethinicity1.rename(columns={31: "Unemployment Rate"},inplace=True)
+#ethinicity1
+
+#Plotting the graphs
+#month2.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'])
+#rda.plot(y=['Men','Women'],marker='+')
+#ethinicity1.plot.pie(subplots=True,autopct='%1.1f%%')
+
+#Filtering out the year 2018, and then analyzing the rates over January, February, and March
+year3 =['2018']
+rdc = unemployment[unemployment.Year.isin(year3)].copy()
+rdc.set_index('Month',inplace=True)
+#Month = ['Jan',"Feb",'Mar']
+#month3 = rdc[rdc.Month.isin(Month)].copy()
+#month3
+
+#month3.set_index('Month',inplace=True)
+#month3
+
+#Analyzing the four ethnicities unemployment rate in March of 2018
+March = ['Mar']
+march3 = rdc[rdc.Month.isin(March)].copy()
+march3
+four2 = march3[['White','Black','Asian','Hispanic']]
+four2
+ethinicity2 = four2.T # or df1.transpose()
+ethinicity2.rename(columns={30: "Unemployment Rate"},inplace=True)
+#ethinicity2
+
+#Plotting the graphs
+#month3.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'])
+#rdc.plot(y=['Men','Women'],marker='+')
+#ethinicity2.plot.pie(subplots=True,autopct='%1.1f%%')
+
+#Filtering out the year 2017, and then analyzing the rates over January, February, and March
+year4 =['2017']
+rde = unemployment[unemployment.Year.isin(year4)].copy()
+rde.set_index('Month',inplace=True)
+#Month = ['Jan',"Feb",'Mar']
+#month4 = rde[rde.Month.isin(Month)].copy()
+#month4
+
+#month4.set_index('Month',inplace=True)
+#month4
+
+#Analyzing the four ethnicities unemployment rate in March of 2017
+March = ['Mar']
+march4 = rde[rde.Month.isin(March)].copy()
+march4
+four3 = march4[['White','Black','Asian','Hispanic']]
+four3
+ethinicity3 = four3.T # or df1.transpose()
+ethinicity3.rename(columns={29: "Unemployment Rate"},inplace=True)
+#ethinicity3
+
+#Plotting the graphs
+#month4.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'])
+#rde.plot(y=['Men','Women'],marker='+')
+#ethinicity3.plot.pie(subplots=True,autopct='%1.1f%%')
+
+#Bar Graphs of Unemployment Rates based on Education Qualification of Adults
+#The bar graphs display the unemployment rates based on the education qualifications of adults in the United States. Each graph shows the visualizes the three months of the year from 2017-2020, comparing them amongst each other.
+fig, axes = plt.subplots(2,2,figsize =(17,12))
+fig.tight_layout(pad=5.0)
+month1.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'],ax=axes[0,0])
+month2.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'],ax=axes[0,1])
+month3.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'],ax=axes[1,0])
+month4.plot.bar(y=['Primary_School','High_School','Associates_Degree','Professional_Degree'],ax=axes[1,1])
+axes[0,0].set_title('Unemployment Rates based on Education Qualification of Adults in 2020',pad=15, color='#333333',weight='bold')
+axes[0,1].set_title('Unemployment Rates based on Education Qualification of Adults in 2019',pad=15, color='#333333',weight='bold')
+axes[1,0].set_title('Unemployment Rates based on Education Qualification of Adults in 2018',pad=15, color='#333333',weight='bold')
+axes[1,1].set_title('Unemployment Rates based on Education Qualification of Adults in 2017',pad=15, color='#333333',weight='bold')
+axes[0,0].set_ylabel('Unemployment Rates')
+axes[0,1].set_ylabel('Unemployment Rates')
+axes[1,0].set_ylabel('Unemployment Rates')
+axes[1,1].set_ylabel('Unemployment Rates')
+axes[0,0].legend(loc='best',bbox_to_anchor=(0, 1))
+axes[0,1].legend(loc='best',bbox_to_anchor=(1, 1))
+axes[1,0].legend(loc='best',bbox_to_anchor=(0, 1))
+axes[1,1].legend(loc='best',bbox_to_anchor=(1, 1))
+
+#Line Graoh with Men and Women Unemployment Rates
+#These line graphs show the unemployment rates of men and women throughout the year. In 2020 only the first three months of the year are recorded while in 2017-2019, the unemployment rates throughout the entire year are displayed.
+fig, axes = plt.subplots(2,2,figsize =(15,12))
+fig.tight_layout(pad=5.0)
+month1.plot(y=['Men','Women'],marker='+',ax=axes[0,0])
+rda.plot(y=['Men','Women'],marker='+',ax=axes[0,1])
+rdc.plot(y=['Men','Women'],marker='+',ax=axes[1,0])
+rde.plot(y=['Men','Women'],marker='+',ax=axes[1,1])
+axes[0,0].set_title('Men and Women Unemployment Rates in 2020',pad=15, color='#333333',weight='bold')
+axes[0,1].set_title('Men and Women Unemployment Rates in 2019',pad=15, color='#333333',weight='bold')
+axes[1,0].set_title('Men and Women Unemployment Rates in 2018',pad=15, color='#333333',weight='bold')
+axes[1,1].set_title('Men and Women Unemployment Rates in 2017',pad=15, color='#333333',weight='bold')
+axes[0,0].set_ylabel('Unemployment Rates')
+axes[0,1].set_ylabel('Unemployment Rates')
+axes[1,0].set_ylabel('Unemployment Rates')
+axes[1,1].set_ylabel('Unemployment Rates')
+
+#Pie Chart showing % of Unemployment amoung the four Ethnicities
+#These pie charts show the percentage of each ethnicity compared to the total unemployment rates of all of the ethincities combined. For example, in 2020 Asian people counted 19.7% of the total unemployment amongst the group.
+fig, axes = plt.subplots(2,2,figsize =(15,12))
+fig.tight_layout(pad=5.0)
+ethinicity.plot.pie(subplots=True,autopct='%1.1f%%',ax=axes[0,0])
+ethinicity1.plot.pie(subplots=True,autopct='%1.1f%%',ax=axes[0,1])
+ethinicity2.plot.pie(subplots=True,autopct='%1.1f%%',ax=axes[1,0])
+ethinicity3.plot.pie(subplots=True,autopct='%1.1f%%',ax=axes[1,1])
+axes[0,0].set_title('% of Unemployment among the four ethnicities in 2020',pad=15, color='#333333',weight='bold')
+axes[0,1].set_title('% of Unemployment among the four ethnicities in 2019',pad=15, color='#333333',weight='bold')
+axes[1,0].set_title('% of Unemployment among the four ethnicities in 2018',pad=15, color='#333333',weight='bold')
+axes[1,1].set_title('% of Unemployment among the four ethnicities in 2017',pad=15, color='#333333',weight='bold')
+axes[0,0].legend(loc='best',bbox_to_anchor=(0, 1))
+axes[0,1].legend(loc='best',bbox_to_anchor=(1, 1))
+axes[1,0].legend(loc='best',bbox_to_anchor=(0, 1))
+axes[1,1].legend(loc='best',bbox_to_anchor=(1, 1))
